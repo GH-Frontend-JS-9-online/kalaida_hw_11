@@ -1,0 +1,25 @@
+.header {
+  width: 100%;
+  &_container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  &-loginText {
+    font-size: 18px;
+    font-weight: 800;
+    border: 2px solid #000;
+    border-radius: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    & i {
+      font-size: 22px;
+      padding-right: 5px;
+    }
+  }
+}
+

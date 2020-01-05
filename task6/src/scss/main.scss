@@ -1,0 +1,11 @@
+@import 'utils/libs';
+@import 'utils/vars';
+@import 'utils/mixins';
+
+html {
+  line-height: $mainLineHeight;
+  font-size: $mainFontSize;
+  color: $mainFontColor;
+}
+
+@import 'modules/wrapper.scss';
