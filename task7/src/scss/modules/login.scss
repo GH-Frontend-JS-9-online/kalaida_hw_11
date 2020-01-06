@@ -8,6 +8,7 @@
     text-align: center;
   }
   &-loginText {
+    display: none;
     font-size: 18px;
     font-weight: 800;
     border: 2px solid #000;
@@ -21,5 +22,23 @@
       padding-right: 5px;
     }
   }
+  &-loginTextLogin {
+    display: block;
+  }
 }
 
+.loginMain_form_bottom {
+  position: relative;
+}
+
+.login-inputBlocker {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background: transparent;
+  bottom: 25px;
+}
+
+.login-inputBlockerNo {
+  display: none;
+}
