@@ -8,7 +8,8 @@ let emailRegister = document.querySelector('#regEmail'),
   emailTestString =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   testLetters = /[a-zA-Z]/,
   testNumber = /[0-9]/,
-  usersArr = [];
+  usersArr = [],
+  dbUsers;
 
 if(emailRegister) {
   emailRegister.addEventListener('input', function (event) {
@@ -63,10 +64,20 @@ if(passwordConfirmRegister) {
 
 if(registerBtn) {
   registerBtn.addEventListener('click', function(event) {
+    let checkEmailCorrectNumber = 0;
+    dbUsers = JSON.parse(localStorage.getItem('users'));
     event.preventDefault();
-    usersArr.push({email : registerEmail, password : registerPassword});
-    console.log(usersArr);
-    localStorage.setItem('users', JSON.stringify(usersArr));
-    alert('You\'ve successfully registered!');
+    for(let i = 0; i < dbUsers.length; i++) {
+      if(registerEmail !== dbUsers[i].email) {
+        checkEmailCorrectNumber = 1;
+      }
+    }
+    if(checkEmailCorrectNumber === 1) {
+      usersArr.push({email : registerEmail, password : registerPassword});
+      localStorage.setItem('users', JSON.stringify(usersArr));
+      alert('You\'ve successfully registered!');
+    } else {
+      alert('This email is already registered');
+    }
   });
 }

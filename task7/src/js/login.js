@@ -59,11 +59,6 @@ if(loginBtn) {
     }
     if(checkUserNumber === 0) {
       alert('Account was not found!');
-      location.reload();
-    } else {
-      setTimeout(() => {
-        location.reload();
-      }, 2500);
     }
   });
 }

@@ -2,7 +2,7 @@ kalaida_hw_11 - ready
 -
      6. WEBPACK template - READY
      7. Create basic UI for the following wireframe:
-      https://www.dropbox.com/s/lo81v9if0y2jfbv/gh-auth-task.pdf?dl=0 - NOT READY
+      https://www.dropbox.com/s/lo81v9if0y2jfbv/gh-auth-task.pdf?dl=0 - READY
      8. Create logic based fake API: - NOT READY
         1) Fake API:
             1. https://github.com/MaksymTo/fake_api
