@@ -9,7 +9,32 @@ let emailRegister = document.querySelector('#regEmail'),
   testLetters = /[a-zA-Z]/,
   testNumber = /[0-9]/,
   usersArr = [],
-  dbUsers;
+  dbUsers,
+  secondDbUsers;
+
+  function sendRequest(method, url, myEmail, myPass, myId) {
+    return fetch(url, {
+      method : method,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify({
+        _id: myId,
+        email: myEmail,
+        password: myPass
+      }),
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        return response.json().then(error => {
+          const err = new Error('Something went wrong');
+          err.data = error;
+          throw err;
+        })
+      });
+  }
 
 if(emailRegister) {
   emailRegister.addEventListener('input', function (event) {
@@ -20,7 +45,7 @@ if(emailRegister) {
       }
       registerError.innerHTML = 'Oops, looks like email or password is incorrect. Please try again.';
     } else {
-      if(!registerBlocker.classList.contains('signup-inputBlockerNo') && ((registerPassword.length > 4 && registerPassword.length < 24) || testLetters.test(registerPassword) || testNumber.test(registerPassword)) && registerPasswordConfirm === registerPassword) {
+      if(!registerBlocker.classList.contains('signup-inputBlockerNo') && ((registerPassword.length > 4) || testLetters.test(registerPassword) || testNumber.test(registerPassword)) && registerPasswordConfirm === registerPassword) {
         registerBlocker.classList.add('signup-inputBlockerNo');
       }
       registerError.innerHTML = '';
@@ -31,7 +56,7 @@ if(emailRegister) {
 if(passwordRegister) {
   passwordRegister.addEventListener('input', function (event) {
     registerPassword = event.target.value;
-    if(registerPassword.length < 4 || !testLetters.test(registerPassword) || !testNumber.test(registerPassword) || registerPassword.length > 24 || !emailTestString.test(registerEmail)) {
+    if(registerPassword.length < 4 || !testLetters.test(registerPassword) || !testNumber.test(registerPassword) || !emailTestString.test(registerEmail)) {
       if(registerBlocker.classList.contains('signup-inputBlockerNo')) {
         registerBlocker.classList.remove('signup-inputBlockerNo');
       }
@@ -64,20 +89,13 @@ if(passwordConfirmRegister) {
 
 if(registerBtn) {
   registerBtn.addEventListener('click', function(event) {
-    let checkEmailCorrectNumber = 0;
-    dbUsers = JSON.parse(localStorage.getItem('users'));
     event.preventDefault();
-    for(let i = 0; i < dbUsers.length; i++) {
-      if(registerEmail !== dbUsers[i].email) {
-        checkEmailCorrectNumber = 1;
-      }
-    }
-    if(checkEmailCorrectNumber === 1) {
-      usersArr.push({email : registerEmail, password : registerPassword});
-      localStorage.setItem('users', JSON.stringify(usersArr));
-      alert('You\'ve successfully registered!');
-    } else {
-      alert('This email is already registered');
-    }
+    const registerId = `f${(~~(Math.random()*1e8)).toString(16)}`;
+    sendRequest('POST','http://localhost:3000/users', registerEmail, registerPassword, registerId)
+      .then(() => {
+        alert('You\'ve successfully registered!');
+        location.reload();
+      })
+      .catch(error => console.log(error))
   });
 }
