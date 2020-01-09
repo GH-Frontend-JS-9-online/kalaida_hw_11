@@ -4,7 +4,7 @@ let emailRegister = document.querySelector('#regEmail'),
   registerBtn = document.querySelector('#signup'),
   registerError = document.querySelector('#regError'),
   registerBlocker = document.querySelector('#signupInputBlocker'),
-  registerEmail, registerPassword, registerPasswordConfirm,
+  registerEmail, registerPassword, registerPasswordConfirm, registerName,
   emailTestString =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   testLetters = /[a-zA-Z]/,
   testNumber = /[0-9]/,
@@ -12,16 +12,21 @@ let emailRegister = document.querySelector('#regEmail'),
   dbUsers,
   secondDbUsers;
 
-  function sendRequest(method, url, myEmail, myPass, myId) {
+  function sendRequest(method, url, myName, myEmail, myPass) {
     return fetch(url, {
       method : method,
       headers: {
         'Content-Type': 'application/json'
       },
       body : JSON.stringify({
-        _id: myId,
+        name: myName,
+        password: myPass,
         email: myEmail,
-        password: myPass
+        position: 'UX/UI Designer',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        phone: '+48 500 400 300',
+        address: '65 Lorem St, Warshaw, PL',
+        organization: 'GeekHub Corp'
       }),
     })
       .then(response => {
@@ -91,7 +96,15 @@ if(registerBtn) {
   registerBtn.addEventListener('click', function(event) {
     event.preventDefault();
     const registerId = `f${(~~(Math.random()*1e8)).toString(16)}`;
-    sendRequest('POST','http://localhost:3000/users', registerEmail, registerPassword, registerId)
+    registerName = '';
+    for(let i = 0; i < registerEmail.length; i++) {
+      if(registerEmail[i] !== '@') {
+        registerName += registerEmail[i];
+      } else {
+        i = registerEmail.length - 1
+      }
+    }
+    sendRequest('POST','http://localhost:3000/users', registerName, registerEmail, registerPassword)
       .then(() => {
         alert('You\'ve successfully registered!');
         location.reload();

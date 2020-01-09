@@ -167,12 +167,24 @@
     reset2Btn.addEventListener('click', function (event) {
       sendRequest('GET', 'http://localhost:3000/users')
         .then(data => {
-          let emailId = -1;
+          let emailId = -1,
+            userNum = 0;
           dbEmails = data;
           for(let i = 0; i < dbEmails.length; i++) {
             if(resetEmail === dbEmails[i].email) {
-              emailId = dbEmails[i]._id;
+              emailId = dbEmails[i].id;
+              userNum = i;
+              i = dbEmails.length - 1;
             }
+          }
+          if(emailId !== -1) {
+            console.log(emailId);
+            alert('Password was changed!(It doesn\'t work! I am sorry but I dont know how to do this((( )');
+            alert(`Your password: ${dbEmails[userNum].password}`);
+            location.reload();
+          } else {
+            alert('Account was not found');
+            location.reload();
           }
         })
         .catch(error => console.log(error))
