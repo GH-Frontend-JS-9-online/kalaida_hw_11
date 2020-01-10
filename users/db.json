@@ -1,0 +1,75 @@
+{
+  "users": [
+    {
+      "name": "gdfgdfgfd",
+      "password": "pDw9P3O2a.4.gd.6s.4.gd.6s$#$_gdf1#bcxGY72.4.gd.6",
+      "email": "gdfgdfgfd@gmail.com",
+      "position": "Full-stack Developer",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "phone": "+48 367832845",
+      "address": "65 Lorem St, Warshaw, PL",
+      "organization": "GeekHub Corp",
+      "id": 423446
+    },
+    {
+      "name": "geekhub10",
+      "password": "g.4.gd.6e#bcxGY7eUNq.Grvk_jg7bH1h$#$_gdfuUNq.Grvb#bcxGY72$3v$90$0Aq6iW9a2Aq6iW9a0EasPYqj",
+      "email": "geekhub10@ck.ua",
+      "position": "Ruby Developer",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "phone": "+48 216032218",
+      "address": "65 Lorem St, Warshaw, PL",
+      "organization": "GeekHub Corp",
+      "id": 423447
+    },
+    {
+      "name": "lesson11",
+      "password": "t$2b$10$e#bcxGY7sUNq.Grvt#bcxGY7pjYBnHaKa$2b$10$sAq6iW9as$3v$90$w_jg7bH1o.4.gd.6r$#$_gdfdjYBnHaK1$410g$22$3v$90$3EasPYqj",
+      "email": "lesson11@gh.ck.ua",
+      "position": "JavaScript Developer",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "phone": "+48 047223784",
+      "address": "65 Lorem St, Warshaw, PL",
+      "organization": "GeekHub Corp",
+      "id": 423448
+    },
+    {
+      "name": "programmer20",
+      "password": "dDw9P3O2e$#$_gdfv$2b$10$e$2b$10$l_jg7bH1o$3v$90$p#bcxGY7ejYBnHaKrEasPYqj1_jg7bH12UNq.Grv3$2b$10$",
+      "email": "programmer20@gmail.com",
+      "position": "Frontend Developer",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "phone": "+48 477488385",
+      "address": "65 Lorem St, Warshaw, PL",
+      "organization": "GeekHub Corp",
+      "id": 423449
+    }
+  ],
+  "threads": [
+    {
+      "users": [
+        "5e130bfe9b610a8363b4b319",
+        "5e13095244e24582b460517c"
+      ],
+      "_id": "5e13343a5badff9ccfb36767",
+      "created_at": "2020-01-06T13:20:58.613Z",
+      "updated_at": "2020-01-06T13:20:58.613Z"
+    }
+  ],
+  "messages": [
+    {
+      "_id": "5e1335f89f86679d60d0897b",
+      "user": "5e130bfe9b610a8363b4b319",
+      "thread": "5e13343a5badff9ccfb36767",
+      "body": "Hello there! Can you say hello to me?",
+      "created_at": "2020-01-06T13:28:24.377Z"
+    },
+    {
+      "_id": "5e1338192ac80a9ed238a72d",
+      "user": "5e13095244e24582b460517c",
+      "thread": "5e13343a5badff9ccfb36767",
+      "body": "Hello there! Can you say hello to me?",
+      "created_at": "2020-01-06T13:37:29.153Z"
+    }
+  ]
+}
