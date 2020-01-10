@@ -52,7 +52,7 @@ if(emailRegister) {
       }
       registerError.innerHTML = 'Oops, looks like email or password is incorrect. Please try again.';
     } else {
-      if(!registerBlocker.classList.contains('signup-inputBlockerNo') && ((registerPassword.length > 4) || testLetters.test(registerPassword) || testNumber.test(registerPassword)) && registerPasswordConfirm === registerPassword) {
+      if(!registerBlocker.classList.contains('signup-inputBlockerNo') && ((registerPassword.length > 4 && registerPassword.length < 16) || testLetters.test(registerPassword) || testNumber.test(registerPassword)) && registerPasswordConfirm === registerPassword) {
         registerBlocker.classList.add('signup-inputBlockerNo');
       }
       registerError.innerHTML = '';
@@ -63,7 +63,7 @@ if(emailRegister) {
 if(passwordRegister) {
   passwordRegister.addEventListener('input', function (event) {
     registerPassword = event.target.value;
-    if(registerPassword.length < 4 || !testLetters.test(registerPassword) || !testNumber.test(registerPassword) || !emailTestString.test(registerEmail)) {
+    if(registerPassword.length < 4 || !testLetters.test(registerPassword) || !testNumber.test(registerPassword) || !emailTestString.test(registerEmail) || registerPassword.length > 16) {
       if(registerBlocker.classList.contains('signup-inputBlockerNo')) {
         registerBlocker.classList.remove('signup-inputBlockerNo');
       }

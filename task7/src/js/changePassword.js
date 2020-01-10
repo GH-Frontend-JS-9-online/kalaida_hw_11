@@ -120,7 +120,7 @@
               i = dbEmails.length - 1;
             }
           }
-          if(reset2Password === dbEmails[resetEmailId].password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password))) {
+          if(reset2Password === dbEmails[resetEmailId].password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password) || reset2Password.length > 16)) {
             if(reset2InputBlocker.classList.contains('reset2-inputBlockerNo')) {
               reset2InputBlocker.classList.remove('reset2-inputBlockerNo');
             }
@@ -154,7 +154,7 @@
             }
             reset2Error.innerHTML = 'Password is incorrect!';
           } else {
-            if(!reset2InputBlocker.classList.contains('reset2-inputBlockerNo') && (reset2Password !== dbEmails[resetEmailId].password || (reset2Password.length > 4 || testLetters.test(reset2Password) || testNumber.test(reset2Password)))) {
+            if(!reset2InputBlocker.classList.contains('reset2-inputBlockerNo') && (reset2Password !== dbEmails[resetEmailId].password || ((reset2Password.length > 4 && reset2Password.length < 16) || testLetters.test(reset2Password) || testNumber.test(reset2Password)))) {
               reset2InputBlocker.classList.add('reset2-inputBlockerNo');
             }
             reset2Error.innerHTML = '';

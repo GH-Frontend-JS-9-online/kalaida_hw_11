@@ -34,7 +34,7 @@
         }
         loginError.innerHTML = 'Oops, looks like email or password is incorrect. Please try again.';
       } else {
-        if(!loginBlocker.classList.contains('login-inputBlockerNo') && ((loginPassword.length > 4) || testLetters.test(loginPassword) || testNumber.test(loginPassword))) {
+        if(!loginBlocker.classList.contains('login-inputBlockerNo') && ((loginPassword.length > 4 && loginPassword.length < 16) || testLetters.test(loginPassword) || testNumber.test(loginPassword))) {
           loginBlocker.classList.add('login-inputBlockerNo');
         }
         loginError.innerHTML = '';
@@ -45,7 +45,7 @@
   if(passwordLogin) {
     passwordLogin.addEventListener('input', function (event) {
       loginPassword = event.target.value;
-      if(loginPassword.length < 4 || !testLetters.test(loginPassword) || !testNumber.test(loginPassword) || !emailTestString.test(loginEmail)) {
+      if(loginPassword.length < 4 || !testLetters.test(loginPassword) || !testNumber.test(loginPassword) || !emailTestString.test(loginEmail) || loginPassword.length > 16) {
         if(loginBlocker.classList.contains('login-inputBlockerNo')) {
           loginBlocker.classList.remove('login-inputBlockerNo');
         }
