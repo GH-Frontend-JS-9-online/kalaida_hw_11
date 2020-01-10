@@ -5,7 +5,7 @@
     loginMessage = document.querySelector('#loginAlert'),
     loginError = document.querySelector('#loginError'),
     loginBlocker = document.querySelector('#loginInputBlocker'),
-    loginEmail, loginPassword,
+    loginEmail, loginPassword, decryptedPass,
     emailTestString =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     testLetters = /[a-zA-Z]/,
     testNumber = /[0-9]/,
@@ -64,13 +64,32 @@
       event.preventDefault();
       sendRequest('GET', 'http://localhost:3000/users')
         .then(data => {
-          let checkUserNumber = 0;
+          let checkUserNumber = -1,
+          checkEmailNumber = 0;
           dbUsers = data;
+          decryptedPass = '';
           for(let i = 0; i < dbUsers.length; i++) {
-            if(loginEmail === dbUsers[i].email && loginPassword === dbUsers[i].password) {
-              checkUserNumber = 1;
+            if(loginEmail === dbUsers[i].email) {
+              checkEmailNumber = i;
+              i = dbUsers.length - 1;
             }
           }
+          if(checkEmailNumber !== -1) {
+            for(let i = 0; i < dbUsers[checkEmailNumber].password.length; i++) {
+              decryptedPass += dbUsers[checkEmailNumber].password[i];
+              i += 7;
+            }
+            if(loginPassword === decryptedPass) {
+              checkUserNumber = 1;
+            } else {
+              checkUserNumber = 0;
+            }
+          }
+          // for(let i = 0; i < dbUsers.length; i++) {
+          //   if(loginEmail === dbUsers[i].email && loginPassword === dbUsers[i].password) {
+          //     checkUserNumber = 1;
+          //   }
+          // }
           if(checkUserNumber === 1) {
             loginMessage.classList.add('header-loginTextLogin');
             emailLogin.value = '';

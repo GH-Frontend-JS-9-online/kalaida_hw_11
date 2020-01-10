@@ -4,7 +4,8 @@ let emailRegister = document.querySelector('#regEmail'),
   registerBtn = document.querySelector('#signup'),
   registerError = document.querySelector('#regError'),
   registerBlocker = document.querySelector('#signupInputBlocker'),
-  registerEmail, registerPassword, registerPasswordConfirm, registerName, registerPhone, registerJob,
+  registerEmail, registerPassword, registerPasswordConfirm, registerName, registerPhone, registerJob, encryptedPass,
+  encryptSymbols = ['$2b$10$', 'EasPYqj', 'UNq.Grv', 'jYBnHaK', 'Aq6iW9a', '_jg7bH1', '#bcxGY7', '$#$_gdf', '$3v$90$', '$410g$2', 'Dw9P3O2', '.4.gd.6'],
   userPosts = ['UX/UI Designer', 'Java Developer', 'JavaScript Developer', 'Ruby Developer', 'QA', 'Backend Developer', 'Frontend Developer', 'Full-stack Developer'],
   emailTestString =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   testLetters = /[a-zA-Z]/,
@@ -93,13 +94,13 @@ if(passwordConfirmRegister) {
   });
 }
 
-
 if(registerBtn) {
   registerBtn.addEventListener('click', function(event) {
     event.preventDefault();
     const registerId = `f${(~~(Math.random()*1e8)).toString(16)}`;
     registerName = '';
     registerPhone = '+48 ';
+    encryptedPass = '';
     registerJob = userPosts[Math.floor(Math.random() * userPosts.length)];
     for(let i = 0; i < registerEmail.length; i++) {
       if(registerEmail[i] !== '@') {
@@ -111,7 +112,11 @@ if(registerBtn) {
     for(let i = 0; i < 9; i++) {
       registerPhone += Math.floor((Math.random() * 9));
     }
-    sendRequest('POST','http://localhost:3000/users', registerName, registerEmail, registerPassword, registerPhone, registerJob)
+    for(let i = 0; i < registerPassword.length; i++) {
+      encryptedPass += registerPassword[i];
+      encryptedPass += encryptSymbols[Math.floor(Math.random() * encryptSymbols.length)];
+    }
+    sendRequest('POST','http://localhost:3000/users', registerName, registerEmail, encryptedPass, registerPhone, registerJob)
       .then(() => {
         alert('You\'ve successfully registered!');
         location.reload();

@@ -11,6 +11,7 @@
     resetForm = document.querySelector('#resetForm'),
     resetMainMessage = document.querySelector('#resetMainMessage'),
     reset2Btn = document.querySelector('#change'),
+    decryptedPass,
     resetEmail,
     emailTestString = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     testLetters = /[a-zA-Z]/,
@@ -170,6 +171,7 @@
           let emailId = -1,
             userNum = 0;
           dbEmails = data;
+          decryptedPass = '';
           for(let i = 0; i < dbEmails.length; i++) {
             if(resetEmail === dbEmails[i].email) {
               emailId = dbEmails[i].id;
@@ -178,8 +180,13 @@
             }
           }
           if(emailId !== -1) {
+            console.log(emailId);
+            for(let i = 0; i < dbEmails[userNum].password.length; i++) {
+              decryptedPass += dbEmails[userNum].password[i];
+              i += 7;
+            }
             alert('Password was changed!(It doesn\'t work! I am sorry but I dont know how to do this((( )');
-            alert(`Your password: ${dbEmails[userNum].password}`);
+            alert(`Your password: ${decryptedPass}`);
             location.reload();
           } else {
             alert('Account was not found');
