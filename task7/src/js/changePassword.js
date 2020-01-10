@@ -178,7 +178,6 @@
             }
           }
           if(emailId !== -1) {
-            console.log(emailId);
             alert('Password was changed!(It doesn\'t work! I am sorry but I dont know how to do this((( )');
             alert(`Your password: ${dbEmails[userNum].password}`);
             location.reload();
