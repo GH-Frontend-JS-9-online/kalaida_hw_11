@@ -26,9 +26,10 @@
         <form class="main_form">
           <input type="email" name="email" id="email" placeholder="Email..." class="main_form-input">
           <input type="password" name="password" id="password" placeholder="Password..." class="main_form-input">
-          <p class="main_form-error">Oops, looks like email or password is incorrect. Please try again.</p>
-          <div class="main_form_bottom">
-            <input type="submit" name="login" id="login" class="main_form-btn" value="Log in">
+          <p class="main_form-error" id="loginError"></p>
+          <div class="main_form_bottom loginMain_form_bottom">
+            <input type="button" name="login" id="login" class="main_form-btn" value="Log in">
+            <div id="loginInputBlocker" class="login-inputBlocker"></div>
             <a href="assets/pages/reset1.html">Forgot password?</a>
           </div>
         </form>

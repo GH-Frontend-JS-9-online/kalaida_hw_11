@@ -21,9 +21,10 @@
           <input type="email" name="regEmail" id="regEmail" placeholder="Email..." class="main_form-input">
           <input type="password" name="regPassword" id="regPassword" placeholder="Password..." class="main_form-input">
           <input type="password" name="regConfirmPassword" id="regConfirmPassword" placeholder="Confirm Password..." class="main_form-input">
-          <p class="main_form-error">Your password does not match.</p>
-          <div class="main_form_bottom">
-            <input type="submit" name="signup" id="signup" class="main_form-btn" value="Sign Up">
+          <p class="main_form-error" id="regError"></p>
+          <div class="main_form_bottom signupMain_form_bottom">
+            <input type="button" name="signup" id="signup" class="main_form-btn " value="Sign Up">
+            <div id="signupInputBlocker" class="signup-inputBlocker"></div>
           </div>
         </form>
       </div>

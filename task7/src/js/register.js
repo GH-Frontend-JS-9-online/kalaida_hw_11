@@ -5,7 +5,9 @@ let emailRegister = document.querySelector('#regEmail'),
   registerError = document.querySelector('#regError'),
   registerBlocker = document.querySelector('#signupInputBlocker'),
   registerEmail, registerPassword, registerPasswordConfirm, registerName, registerPhone, registerJob, encryptedPass,
-  encryptSymbols = ['$2b$10$', 'EasPYqj', 'UNq.Grv', 'jYBnHaK', 'Aq6iW9a', '_jg7bH1', '#bcxGY7', '$#$_gdf', '$3v$90$', '$410g$2', 'Dw9P3O2', '.4.gd.6'],
+  // encryptSymbols = ['$2b$10$', 'EasPYqj', 'UNq.Grv', 'jYBnHaK', 'Aq6iW9a', '_jg7bH1', '#bcxGY7', '$#$_gdf', '$3v$90$', '$410g$2', 'Dw9P3O2', '.4.gd.6'],
+  encryptSymbols = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890_#$/',
+  encryptString = '',
   userPosts = ['UX/UI Designer', 'Java Developer', 'JavaScript Developer', 'Ruby Developer', 'QA', 'Backend Developer', 'Frontend Developer', 'Full-stack Developer'],
   emailTestString =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   testLetters = /[a-zA-Z]/,
@@ -101,6 +103,7 @@ if(registerBtn) {
     registerName = '';
     registerPhone = '+48 ';
     encryptedPass = '';
+    encryptString = '';
     registerJob = userPosts[Math.floor(Math.random() * userPosts.length)];
     for(let i = 0; i < registerEmail.length; i++) {
       if(registerEmail[i] !== '@') {
@@ -114,7 +117,11 @@ if(registerBtn) {
     }
     for(let i = 0; i < registerPassword.length; i++) {
       encryptedPass += registerPassword[i];
-      encryptedPass += encryptSymbols[Math.floor(Math.random() * encryptSymbols.length)];
+      for(let j = 0; j < 7; j++) {
+        encryptString += encryptSymbols[Math.floor(Math.random() * encryptSymbols.length)]
+      }
+      encryptedPass += encryptString;
+      encryptString = '';
     }
     sendRequest('POST','http://localhost:3000/users', registerName, registerEmail, encryptedPass, registerPhone, registerJob)
       .then(() => {
